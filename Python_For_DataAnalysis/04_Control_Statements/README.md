@@ -111,26 +111,26 @@ for i in range(10):
 
 
 # Prints 0 to 4 only
-| `continue`  | **Skip the rest of this iteration**, go to next   |
- ```python
+| `continue` **Skip the rest of this iteration**, go to next   
+```python 
 for i in range(6):
     if i == 3:
         continue
     print(i)
+```
 
 
 # Prints 0,1,2,4,5 (skips 3)
 
-| `pass`      | **Do nothing** – placeholder                      | 
+| `pass`       **Do nothing** – placeholder  
+
 ```python
 for i in range(5):
     if i == 3:
         pass  # I'll add code later
     print(i)
-# Prints all 0–4
-``` |
-| `return`    | **Exit the function** (and loop if inside one)    | Used in functions (see below)                |
-
+```
+          |
 ## 4. `return` in Functions (Important!)
 
 `return` stops the function and sends back a value.
