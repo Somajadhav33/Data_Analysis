@@ -40,7 +40,7 @@ print("   ".isspace())      # True
 
 # Modification & Replacement
 
-print("I like cats".replace("cats", "dogs"))
+print("I like cats and cats".replace("cats", "dogs"))
 # "I like dogs"
 
 print("a,b,c".split(","))

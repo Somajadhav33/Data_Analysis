@@ -8,15 +8,26 @@ print(cars[-1])       # Ford
 # Modify
 cars[1] = "Mercedes"
 
+#iterate
+for i in cars:
+    print(i)
+
 # Add items
 cars.append("Honda")
+print(cars)
 cars.insert(0, "Lamborghini")
-cars.extend(["Toyota", "Suzuki"])
+cars.extend("Suzuki")
+print(cars)
+print(len(cars))
 
 # Remove items
 cars.remove("Ford")
-last = cars.pop()     # Removes and returns last item
+
+last = cars.pop() 
 cars.clear()          # Empty list
+print(cars) 
+del cars
+print(cars)    # Removes and returns last item
 
 # Useful operations
 numbers = [5, 2, 8, 1, 9]

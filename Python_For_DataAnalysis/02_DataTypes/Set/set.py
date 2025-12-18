@@ -9,7 +9,6 @@ print(s1)
 print(s2)
 print(s3)
 
-
 #Operations And Methods
 print(len(s3))
 s3.add("d")
@@ -34,6 +33,9 @@ print(5 in s1)
 print(5 not in s1)
 
 #Mathematical Ops
+s5 = {4, 5, 6, 7, 8}
+s7 = {7, 8, 9, 10}
+print(s5 | s7) #Union
 
 print(s1 & s2) #Intersection
 print(s1 - s2) #or s2 - s1 Diffrence
