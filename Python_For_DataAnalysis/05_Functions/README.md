@@ -1,227 +1,229 @@
-# Functions in Python
+# Python Functions Guide
 
-**What is a Function?**
-Think of a function as a **mini-program** inside your main program. It is a reusable block of code that does one specific job. Instead of writing the same code again and again, you write it once in a function and "call" it whenever you need it.
+This document provides detailed definitions and explanations for every concept used in `functions.py`.
 
----
+## 1. Core Concepts
 
-## 1. Basic Functions
+### Function
 
-### Defining & Calling
-- **Definition**: Creating the function using `def`.
-- **Calling**: Using the function by writing its name followed by parentheses `()`.
+**Definition**: A function is a block of organized, reusable code that performs a single, specific related action. It only runs when it is called.
 
-```python
-def greet():                        # Defining the function
-    print("Hello, World!")
+- **Why use it?**: To avoid writing the same code over and over again.
+- **Code**:
+  ```python
+  def greet():
+      print("Hello!")
+  greet()
+  ```
 
-greet()                             # Calling the function -> Prints: Hello, World!
-```
+### Function vs Method
 
-### Parameters vs. Arguments
-Many beginners get these mixed up. Here is the simple difference:
-- **Parameter**: The **variable name** written inside the parentheses when you *define* the function. (It's like a placeholder).
-- **Argument**: The **actual value** you send to the function when you *call* it.
+**Definition**:
 
-```python
-# 'name' is the PARAMETER (placeholder)
-def greet(name):
-    print(f"Hello, {name}!")
+- **Function**: Defined independently (stand-alone).
+- **Method**: A function that is defined inside a class and is associated with an object.
 
-# "Shery" is the ARGUMENT (actual data)
-greet("Shery")
-```
+## 2. Returning Values
 
-### Default Values
-You can give a parameter a "backup" value. If the user forgets to provide an argument, the function uses the backup.
+### Return Statement
 
-```python
-def introduce(name, age=18):        # age defaults to 18 if not provided
-    print(f"I'm {name}, {age} years old")
+**Definition**: The `return` statement is used to exit a function and go back to the place where it was called. It can send a result back to the caller.
 
-introduce("Alex")                   # Uses default age -> I'm Alex, 18 years old
-introduce("Shery", 21)              # Uses provided age -> I'm Shery, 21 years old
-```
+- **Code**:
+  ```python
+  def sum(a, b):
+      return a + b
+  ```
 
-### Return Values
-- **Printing**: Just shows text on the screen. You can't use that text for math or logic later.
-- **Returning**: Gives the result back to the computer so it can be saved in a variable.
+### Returning Multiple Values
 
-**Think of it like ordering food:**
-- `print`: The waiter shows you the food but takes it away immediately.
-- `return`: The waiter gives you the food so you can eat it.
+**Definition**: Python functions can return more than one value. When they do, Python automatically packs these values into a **Tuple**.
 
-```python
-def add(a, b):
-    return a + b                    # Gives the result back
+- **Code**:
+  ```python
+  def multiple_values():
+      return 1, 2, 3
+  # Returns: (1, 2, 3)
+  ```
 
-result = add(10, 20)                # The result (30) is saved in 'result'
-print(result)                       # Now we print the saved result
-```
+## 3. Arguments and Parameters
 
----
+### Formal vs Actual Arguments
 
-## 2. Advanced Argument Types
+**Definition**:
+
+- **Formal Arguments (Parameters)**: The variables written in the parenthesis when _defining_ the function. They act as placeholders.
+- **Actual Arguments**: The real values passed to the function when _calling_ it.
+- **Code**:
+  ```python
+  def add(a, b):      # 'a' and 'b' are Formal Arguments
+      return a + b
+  add(10, 20)         # '10' and '20' are Actual Arguments
+  ```
 
 ### Positional Arguments
-The standard way. The first argument goes to the first parameter, the second to the second, and so on. **Order matters!**
 
-```python
-def show(a, b):
-    print(a, b)
+**Definition**: Arguments that must be passed in the correct order. The first argument goes to the first parameter, the second to the second, and so on.
 
-show(1, 2)                          # a gets 1, b gets 2
-```
+- **Code**:
+  ```python
+  def user(name, age):
+      print(name, age)
+  user("John", 30) # Correct order
+  ```
 
 ### Keyword Arguments
-You specify which argument goes to which parameter by name. **Order does not matter.**
 
-```python
-show(b=2, a=1)                      # Safer! a still gets 1, b gets 2
-```
+**Definition**: Arguments passed by specifying the parameter name. When using keyword arguments, the order does not matter.
 
-### Variable-Length Arguments
-What if you don't know how many arguments the user will send?
+- **Code**:
+  ```python
+  def grocery(item, price):
+      print(item, price)
+  grocery(price=20, item="Apple") # Order doesn't matter
+  ```
 
-#### `*args` (Non-Keyword Arguments)
-- Allows you to pass **any number** of arguments.
-- Python collects them all into a **Tuple** (a list that cannot be changed).
-- *Analogy*: Like a shopping bag where you can throw in as many items as you want.
+### Default Arguments
 
-```python
-def add_all(*numbers):
-    # 'numbers' becomes a tuple: (1, 2, 3, 4, 5)
-    return sum(numbers)
+**Definition**: Parameters that assume a default value if a value is not provided in the function call.
 
-print(add_all(1, 2, 3, 4, 5))        # Output: 15
-```
+- **Code**:
+  ```python
+  def add(a=10, b=20):
+      return a + b
+  print(add())    # Uses default: 10 + 20
+  print(add(5))   # Uses 5 + 20
+  ```
 
-#### `**kwargs` (Keyword Arguments)
-- Allows you to pass **any number** of named arguments (key=value).
-- Python collects them into a **Dictionary**.
-- *Analogy*: Like filling out a form with many optional fields (Name, Age, City, etc.).
+## 4. Variable Length Arguments
 
-```python
-def print_details(**info):
-    # 'info' becomes a dictionary: {'name': 'Shery', 'age': 21}
-    for key, value in info.items():
-        print(f"{key}: {value}")
+### `*args` (Non-Keyword Arguments)
 
-print_details(name="Shery", age=21)
-```
+**Definition**: Special syntax used to pass a variable number of arguments to a function. It allows you to pass as many arguments as you want, and they are stored as a **Tuple**.
 
----
+- **Code**:
+  ```python
+  def convert_to_list(*args):
+      print(args)
+  convert_to_list(1, 2, 3, 4, 5) # Output: (1, 2, 3, 4, 5)
+  ```
 
-## 3. Scope (Global vs. Local)
+### `**kwargs` (Keyword Arguments)
 
-**Analogy:**
-- **Global Variable**: Like the air conditioning in a **House**. Everyone in every room can feel it.
-- **Local Variable**: Like a lamp in a **Bedroom**. Only people in that bedroom can see it.
+**Definition**: Special syntax that allows you to pass a variable number of _keyword_ (named) arguments. They are stored as a **Dictionary**.
 
-```python
-x = 10                              # Global (House)
+- **Code**:
+  ```python
+  def print_details(**kwargs):
+      print(kwargs)
+  print_details(name="John", age=30) # Output: {'name': 'John', 'age': 30}
+  ```
 
-def func():
-    y = 5                           # Local (Bedroom)
-    print(x)                        # Works! Bedroom can see House stuff.
-    # print(y)                      # Works! Inside Bedroom.
+## 5. Variable Scope
 
-func()
-print(x)                            # Works!
-# print(y)                          # ERROR! You are outside the Bedroom.
-```
+### Local vs Global Variables
+
+**Definition**:
+
+- **Global Variable**: A variable declared outside all functions. It can be accessed by any function.
+- **Local Variable**: A variable declared inside a function. It can only be used inside that specific function.
 
 ### The `global` Keyword
-If you want to change a Global variable from inside a function, you must ask for permission using `global`.
+
+**Definition**: A keyword used to modify a global variable inside a local scope (inside a function). Without this keyword, modifying a global variable inside a function simply creates a new local variable with the same name.
+
+- **Code**:
+  ```python
+  count = 0
+  def increment():
+      global count  # Allows proper modification of the global 'count'
+      count += 1
+  ```
+
+## 6. Advanced Functions
+
+### Recursive Function
+
+**Definition**: A function that calls itself. To prevent it from running forever (infinite loop), it must have a "base case" that stops the recursion.
+
+- **Example**: Calculating factorial (`5! = 5 * 4 * 3 * 2 * 1`).
 
 ```python
-count = 0
-
-def increment():
-    global count                    # Permission to edit the global 'count'
-    count += 1
-
-increment()
-print(count)                        # 1 (It actually changed!)
-```
-
----
-
-## 4. Special Function Types
-
-### Recursive Functions
-A function that **calls itself**. It's like a loop but without `while` or `for`.
-*Warning*: It must have a stop condition, or it will run forever (Infinite Loop).
-
-```python
-def count_down(n):
-    if n == 0:                      # Stop condition
-        print("Blast off!")
+def factorial(n):
+    if n == 1:
+        return 1
     else:
-        print(n)
-        count_down(n-1)             # Calls itself with one less
-
-count_down(3)                       # 3, 2, 1, Blast off!
+        return n * factorial(n-1)
 ```
 
-### Lambda Functions
-A short, one-line function that has no name. Useful for quick, simple math.
-*Syntax*: `lambda input: output`
+### Lambda Function
+
+**Definition**: A small, anonymous (nameless) function. It can take any number of arguments but can only have one expression.
+
+- **Three common helpers**:
+  1.  **Map**: Applies a function to every item in a list.
+  2.  **Filter**: Creates a list of elements for which a function returns true.
+  3.  **Reduce**: Performs a rolling computation to sequential pairs of values in a list (e.g., summing them all up).
+
+**Example**:
 
 ```python
-from functools import reduce
+nums = [1, 2, 3, 4, 5, 6]
 
-nums = [1, 2, 3, 4, 5]
+#map -> apply a function to all items in an iterable
+squares = list(map(lambda x: x**2, nums))
+print(squares)
 
-# map → transform each
-squares = list(map(lambda x: x**2, nums))        # [1,4,9,16,25]
+#filter -> filter items based on a condition
+evens = list(filter(lambda x: x%2 == 0, nums))
+print(evens)
 
-# filter → keep some
-evens = list(filter(lambda x: x%2==0, nums))     # [2,4]
+#reduce -> apply a function to all items in an iterable and return a single value
+add_all = reduce(lambda x, y: x + y, nums)
+print(add_all)
 
-# reduce → combine all
-total = reduce(lambda x,y: x+y, nums)           # 15
 ```
 
-### Generators (Using `yield`)
-Normal functions return everything at once. Generators give you one value at a time.
-*Benefit*: Saves huge amounts of memory when working with large data.
+### Generators (`yield`)
+
+**Definition**: A function that returns an iterator (a sequence of values) one by one using the `yield` keyword. Unlike a standard function that returns all values at once (and uses more memory), a generator produces values on the fly.
+
+- **Benefit**: More memory efficient for large datasets.
+  **Example**:
 
 ```python
 def count_up_to(n):
     num = 1
     while num <= n:
-        yield num                   # Pauses here and gives 'num'
-        num += 1                    # Resumes from here next time
+        yield num #generator - stores one value at a time
+        num += 1
 
-# It doesn't store 1,2,3,4,5 in memory all at once.
-for number in count_up_to(5):
-    print(number)
+print(tuple(count_up_to(10)))
 ```
 
 ### Decorators
-A way to modify a function without changing its code. Think of it like **gift wrapping** – the gift (function) is the same, but it looks different (has extra behavior) on the outside.
+
+**Definition**: A design pattern that allows you to modify the behavior of a function without changing its code. It "wraps" another function in order to extend its behavior.
+
+- **Syntax**: Uses the `@` symbol (e.g., `@wrapper_function`).
+
+**Example**:
 
 ```python
-def wrapper_func(original_func):
-    def inner():
-        print("--- Start ---")      # Extra behavior before
-        original_func()
-        print("--- End ---")        # Extra behavior after
-    return inner
+def wrapper_function(original_function):
+    def inner_function(): #inner function
+        print("--start--")
+        original_function() #function call
+        print("--end--")
 
-@wrapper_func                       # Apply the decorator
-def say_hello():
+    return inner_function
+
+@wrapper_function #decorator
+def sy_hello(): #original function
     print("Hello!")
-
-say_hello()
-# Output:
-# --- Start ---
-# Hello!
-# --- End ---
+sy_hello()
 ```
 
 ---
 
-
-*Updated: December 2025*
+Last Updated \_ Dec 2025
