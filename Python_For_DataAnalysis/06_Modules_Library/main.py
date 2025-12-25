@@ -24,7 +24,7 @@ print(sys.argv) #Command-line arguments
 print(sys.version) #Python version
 print(sys.maxsize) #Maximum integer size
 print(sys.platform) #Platform
-# print(sys.path)
+print(sys.path)
 # data = sys.stdin.readline() #Read from standard input
 # print(data)
 
